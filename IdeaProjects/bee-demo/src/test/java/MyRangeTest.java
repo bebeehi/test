@@ -26,4 +26,62 @@ public class MyRangeTest {
         boolean result = myRange.isStartWithInclude();
         assertTrue(result);
     }
+    @Test
+    public void endNumberWithExclude() {
+        MyRange myRange = new MyRange("[1,5)");
+        int result = myRange.getEnd();
+        assertEquals(4, result);
+    }
+
+    @Test
+    public void endNumberWithInclude() {
+        MyRange myRange = new MyRange("[1,5]");
+        int result = myRange.getEnd();
+        assertEquals(5, result);
+    }
+
+    @Test
+    public void endWithExclude() {
+        MyRange myRange = new MyRange("[1,5)");
+        boolean result = myRange.isEndWithInclude();
+        assertFalse(result);
+    }
+
+    @Test
+    public void endWithInclude() {
+        MyRange myRange = new MyRange("[1,5]");
+        boolean result = myRange.isEndWithInclude();
+        assertTrue(result);
+    }
+    @Test
+    @DisplayName("ตรวจสอบ result [1,5]")
+    public void getResultCase1(){
+        MyRange myRange = new MyRange("[1,5]");
+        String result = myRange.getResult();
+        assertEquals("1,2,3,4,5", result);
+    }
+
+    @Test
+    @DisplayName("ตรวจสอบ result [1,5)")
+    public void getResultCase2(){
+        MyRange myRange = new MyRange("[1,5)");
+        String result = myRange.getResult();
+        assertEquals("1,2,3,4", result);
+    }
+
+    @Test
+    @DisplayName("ตรวจสอบ result (1,5]")
+    public void getResultCase3(){
+        MyRange myRange = new MyRange("(1,5]");
+        String result = myRange.getResult();
+        assertEquals("2,3,4,5", result);
+    }
+
+    @Test
+    @DisplayName("ตรวจสอบ result (1,5)")
+    public void getResultCase4(){
+        MyRange myRange = new MyRange("(1,5)");
+        String result = myRange.getResult();
+        assertEquals("2,3,4", result);
+    }
 }
