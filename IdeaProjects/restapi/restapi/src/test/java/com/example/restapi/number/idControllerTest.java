@@ -1,6 +1,7 @@
 
 package com.example.restapi.number;
 
+import com.example.restapi.user.UserResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,5 +29,12 @@ public class idControllerTest {
 
         ResponseModel result = restTemplate.getForObject("/id", ResponseModel.class);
         assertEquals("XYZ7", result.getId());
+    }
+
+    @Test
+    void suucess_with_getUser() {
+        UserResponse result = restTemplate.getForObject("/user", UserResponse.class);
+        assertEquals("Fake name", result.getName());
+        assertEquals("Fake username", result.getUsername());
     }
 }
